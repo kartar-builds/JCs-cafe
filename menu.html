@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu — Café JC's | Chandigarh</title>
+  <meta name="description" content="Explore Café JC's full menu — All Day Breakfast, North Indian, Italian, Continental, Pan-Asian and artisanal beverages.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,600;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <a href="index.html" class="nav-logo">CAFÉ <span>JC's</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="menu.html">Menu</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="visit.html">Visit</a></li>
+    <li><a href="reservations.html">Reserve</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="tel:+918437043234" class="nav-phone">+91 84370 43234</a>
+    <a href="reservations.html" class="btn-nav">Reserve a Table</a>
+  </div>
+  <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="nav-overlay"></div>
+<div class="nav-drawer">
+  <a href="index.html">Home</a>
+  <a href="menu.html">Menu</a>
+  <a href="gallery.html">Gallery</a>
+  <a href="about.html">About</a>
+  <a href="visit.html">Visit</a>
+  <a href="reservations.html">Reserve</a>
+  <a href="tel:+918437043234" class="drawer-phone">+91 84370 43234</a>
+  <a href="reservations.html" class="btn-drawer">Reserve a Table</a>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="hero-bg" style="background-image: url('https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/59/71/fb/photo0jpg.jpg?w=2000&h=-1&s=1');"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="hero-eyebrow">What We Serve</span>
+    <h1>Our Menu</h1>
+    <div class="hero-divider"></div>
+  </div>
+</section>
+
+<!-- MENU SECTION -->
+<section class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">Crafted with Love</span>
+      <h2>From Morning to Midnight</h2>
+      <div class="divider"></div>
+      <p>Four cuisines, one roof — explore our full spread of breakfast, mains, and beverages.</p>
+    </div>
+
+    <!-- TABS -->
+    <div class="menu-tabs reveal">
+      <button class="menu-tab active" data-tab="breakfast">All Day Breakfast</button>
+      <button class="menu-tab" data-tab="northindian">North Indian</button>
+      <button class="menu-tab" data-tab="italian">Italian</button>
+      <button class="menu-tab" data-tab="continental">Continental</button>
+      <button class="menu-tab" data-tab="panasian">Pan-Asian</button>
+      <button class="menu-tab" data-tab="beverages">Beverages</button>
+    </div>
+
+    <!-- ALL DAY BREAKFAST -->
+    <div class="menu-panel active" id="panel-breakfast">
+      <div class="menu-grid">
+        <div class="card">
+          <div class="card-img"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/59/71/fb/photo0jpg.jpg?w=2000&h=-1&s=1" alt="English Brunch" loading="lazy"></div>
+          <div class="card-body">
+            <span class="card-badge">Chef's Special</span>
+            <h4>English Brunch Platter</h4>
+            <p>Two eggs your way, baked beans, sautéed mushrooms, grilled tomato and toasted sourdough.</p>
+            <div class="card-price">₹420</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/9a/3c/81/indo-chini-bro-bro.jpg?w=1600&h=-1&s=1" alt="Pancakes" loading="lazy"></div>
+          <div class="card-body">
+            <span class="card-badge">Morning Favourite</span>
+            <h4>Buttermilk Pancakes</h4>
+            <p>Fluffy stacked pancakes served with maple syrup, fresh berries and whipped butter.</p>
+            <div class="card-price">₹320</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/b5/38/bd/cafe-jc-s.jpg?w=1100&h=-1&s=1" alt="Avocado Toast" loading="lazy"></div>
+          <div class="card-body">
+            <span class="card-badge">Healthy Pick</span>
+            <h4>Avocado Toast</h4>
+            <p>Smashed avocado on multigrain toast with cherry tomatoes, microgreens and chilli flakes.</p>
+            <div class="card-price">₹280</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/b5/39/c2/cafe-jc-s.jpg?w=900&h=-1&s=1" alt="Croissant" loading="lazy"></div>
+          <div class="card-body">
+            <span class="card-badge">Bakery</span>
+            <h4>Hazelnut Croissant</h4>
+            <p>Buttery, flaky croissant filled with rich hazelnut praline cream — a morning indulgence.</p>
+            <div class="card-price">₹180</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/9a/3a/c4/indoor-setting-also-available.jpg?w=1400&h=800&s=1" alt="Eggs Benedict" loading="lazy"></div>
+          <div class="card-body">
+            <span class="card-badge">Classic</span>
+            <h4>Eggs Benedict</h4>
+            <p>Poached eggs and Canadian bacon on an English muffin, drizzled with Hollandaise sauce.</p>
+            <div class="card-price">₹380</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/b5/39/c6/cafe-jc-s.jpg?w=1100&h=-1&s=1" alt="French Toast" loading="lazy"></div>
+          <div class="card-body">
+            <span class="card-badge">Sweet Start</span>
+            <h4>French Toast</h4>
+            <p>Thick-cut brioche dipped in custard, pan-fried golden and served with seasonal compote.</p>
+            <div class="card-price">₹260</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NORTH INDIAN -->
+    <div class="menu-panel" id="panel-northindian">
+      <div class="menu-grid">
+        <div class="card">
+          <div class="card-img"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/9a/3c/81/indo-chini-bro-bro.jpg?w=1600&h=-1&s=1" alt="Dal Makhani" loading="lazy"></div>
+          <div class="card-body">
+            <span class="card-badge">Comfort Classic</span>
+            <h4>Dal Makhani</h4>
+            <p>Slow-cooked black lentils simmered overnight in tomato-butter gravy with a touch of cream.</p>
+            <div class="card-price">₹340</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/b5/38/bd/cafe-jc-s.jpg?w=1100&h=-1&s=1" alt="Paneer Tikka" loading="lazy"></div>
+          <div class="card-body">
+            <span class="card-badge">Starter</span>
+            <h4>Paneer Tikka</h4>
+            <p>Marinated cottage cheese chunks grilled in a tandoor with peppers and onions.</p>
+            <div class="card-price">₹320</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/59/71/fb/photo0jpg.jpg?w=2000&h=-1&s=1" alt="Butter Chicken" loading="lazy"></div>
+          <div class="card-body">
+            <span class="card-badge">Bestseller</span>
+            <h4>Butter Chicken</h4>
+            <p>Tender chicken in a velvety tomato-cashew sauce, best paired with garlic naan.</p>
+            <div class="card-price">₹420</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ITALIAN -->
+    <div class="menu-panel" id="panel-italian">
+      <div class="menu-grid">
+        <div class="card">
+          <div class="card-img"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/b5/38/bd/cafe-jc-s.jpg?w=1100&h=-1&s=1" alt="Pasta" loading="lazy"></div>
+          <div class="card-body">
+            <span class="card-badge">Bestseller</span>
+            <h4>Creamy Pasta</h4>
+            <p>Hand-tossed pasta in a rich cream sauce, finished with fresh herbs and parmesan shavings.</p>
+            <div class="card-price">₹380</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/9a/3c/81/indo-chini-bro-bro.jpg?w=1600&h=-1&s=1" alt="Pizza" loading="lazy"></div>
+          <div class="card-body">
+            <span class="card-badge">Wood-Fired Style</span>
+            <h4>Margherita Pizza</h4>
+            <p>Classic Neapolitan-style pizza with San Marzano tomato sauce, fresh mozzarella and basil.</p>
+            <div class="card-price">₹420</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/59/71/fb/photo0jpg.jpg?w=2000&h=-1&s=1" alt="Risotto" loading="lazy"></div>
+          <div class="card-body">
+            <span class="card-badge">Chef's Pick</span>
+            <h4>Mushroom Risotto</h4>
+            <p>Arborio rice slow-cooked with wild mushrooms, white wine and aged parmesan.</p>
+            <div class="card-price">₹440</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTINENTAL -->
+    <div class="menu-panel" id="panel-continental">
+      <div class="menu-grid">
+        <div class="card">
+          <div class="card-img"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/59/71/fb/photo0jpg.jpg?w=2000&h=-1&s=1" alt="Grilled Chicken" loading="lazy"></div>
+          <div class="card-body">
+            <span class="card-badge">Grills</span>
+            <h4>Herb Grilled Chicken</h4>
+            <p>Free-range chicken breast marinated in rosemary and garlic, served with seasonal vegetables.</p>
+            <div class="card-price">₹480</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/b5/38/bd/cafe-jc-s.jpg?w=1100&h=-1&s=1" alt="Club Sandwich" loading="lazy"></div>
+          <div class="card-body">
+            <span class="card-badge">Café Classic</span>
+            <h4>Club Sandwich</h4>
+            <p>Triple-decker with grilled chicken, bacon, lettuce, tomato and chipotle mayo on toasted bread.</p>
+            <div class="card-price">₹320</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/9a/3c/81/indo-chini-bro-bro.jpg?w=1600&h=-1&s=1" alt="Caesar Salad" loading="lazy"></div>
+          <div class="card-body">
+            <span class="card-badge">Fresh</span>
+            <h4>Caesar Salad</h4>
+            <p>Crisp romaine, shaved parmesan, house croutons and housemade Caesar dressing.</p>
+            <div class="card-price">₹260</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAN-ASIAN -->
+    <div class="menu-panel" id="panel-panasian">
+      <div class="menu-grid">
+        <div class="card">
+          <div class="card-img"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/9a/3c/81/indo-chini-bro-bro.jpg?w=1600&h=-1&s=1" alt="Indo Chinese" loading="lazy"></div>
+          <div class="card-body">
+            <span class="card-badge">Fan Favourite</span>
+            <h4>Indo-Chinese Noodles</h4>
+            <p>Wok-tossed Hakka noodles with crisp vegetables and bold Indo-Chinese sauces.</p>
+            <div class="card-price">₹280</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/59/71/fb/photo0jpg.jpg?w=2000&h=-1&s=1" alt="Thai Curry" loading="lazy"></div>
+          <div class="card-body">
+            <span class="card-badge">Bold Flavours</span>
+            <h4>Thai Green Curry</h4>
+            <p>Fragrant coconut milk curry with Thai basil, lime leaves and seasonal vegetables or chicken.</p>
+            <div class="card-price">₹380</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/b5/38/bd/cafe-jc-s.jpg?w=1100&h=-1&s=1" alt="Sushi Roll" loading="lazy"></div>
+          <div class="card-body">
+            <span class="card-badge">Light Bite</span>
+            <h4>Vegetable Spring Rolls</h4>
+            <p>Crispy rolls stuffed with glass noodles and julienned vegetables, served with sweet chilli dip.</p>
+            <div class="card-price">₹220</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BEVERAGES -->
+    <div class="menu-panel" id="panel-beverages">
+      <div class="menu-grid">
+        <div class="card">
+          <div class="card-img"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/b5/39/c2/cafe-jc-s.jpg?w=900&h=-1&s=1" alt="Coffee" loading="lazy"></div>
+          <div class="card-body">
+            <span class="card-badge">House Favourite</span>
+            <h4>Signature Cold Brew</h4>
+            <p>Slow-extracted cold brew served over ice with oat milk and a hint of vanilla.</p>
+            <div class="card-price">₹220</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/b5/39/c6/cafe-jc-s.jpg?w=1100&h=-1&s=1" alt="Mocktail" loading="lazy"></div>
+          <div class="card-body">
+            <span class="card-badge">Mocktail</span>
+            <h4>Garden Refresher</h4>
+            <p>Mint, cucumber and lime with sparkling water and a touch of elderflower — utterly refreshing.</p>
+            <div class="card-price">₹180</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/b5/39/c8/cafe-jc-s.jpg?w=1100&h=-1&s=1" alt="Shake" loading="lazy"></div>
+          <div class="card-body">
+            <span class="card-badge">Indulgent</span>
+            <h4>Artisanal Milkshake</h4>
+            <p>Thick and creamy house-crafted shakes in seasonal flavours — chocolate, strawberry and mango.</p>
+            <div class="card-price">₹240</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/b5/39/c2/cafe-jc-s.jpg?w=900&h=-1&s=1" alt="Cappuccino" loading="lazy"></div>
+          <div class="card-body">
+            <span class="card-badge">Coffee</span>
+            <h4>Frothy Cappuccino</h4>
+            <p>Double-shot espresso topped with velvety microfoam — the perfect pick-me-up.</p>
+            <div class="card-price">₹160</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/b5/39/c6/cafe-jc-s.jpg?w=1100&h=-1&s=1" alt="Lemonade" loading="lazy"></div>
+          <div class="card-body">
+            <span class="card-badge">Summer Sip</span>
+            <h4>Virgin Mojito</h4>
+            <p>Classic mojito without the alcohol — fresh mint, lime wedges and a generous pour of soda.</p>
+            <div class="card-price">₹160</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/b5/39/c8/cafe-jc-s.jpg?w=1100&h=-1&s=1" alt="Tea" loading="lazy"></div>
+          <div class="card-body">
+            <span class="card-badge">Wellness</span>
+            <h4>Herbal Infusion</h4>
+            <p>Hand-picked chamomile, hibiscus or green tea steeped to perfection — warm or iced.</p>
+            <div class="card-price">₹120</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Order online -->
+    <div style="text-align:center; margin-top:3rem;" class="reveal">
+      <p style="margin-bottom:1.5rem;">Can't make it in? Order online via:</p>
+      <div class="order-platforms">
+        <a href="https://www.zomato.com/chandigarh/cafe-jcs-sector-10/order" target="_blank" rel="noopener noreferrer" class="platform-btn" style="border-color:var(--teal); color:var(--teal);">Order on Zomato</a>
+        <a href="https://www.swiggy.com/restaurants/cafe-jcs-sector-10-chandigarh-41453" target="_blank" rel="noopener noreferrer" class="platform-btn" style="border-color:var(--teal); color:var(--teal);">Order on Swiggy</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-band">
+  <div class="container reveal">
+    <span class="eyebrow" style="color:rgba(245,239,224,0.8);">Dine With Us</span>
+    <h2>Reserve Your Table Today</h2>
+    <p>Walk-ins are always welcome, but booking ahead ensures your perfect spot.</p>
+    <a href="reservations.html" class="btn btn-outline">Book a Table</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo">CAFÉ <span>JC's</span></div>
+      <p class="footer-tagline">Chandigarh's most aesthetic culinary escape.</p>
+      <div class="footer-social">
+        <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+          <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div>
+      <h4>Navigate</h4>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="menu.html">Our Menu</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="visit.html">Visit + Contact</a></li>
+        <li><a href="reservations.html">Reservations</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <ul class="footer-info">
+        <li><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Coal Depot Complex, Sector 10D, Chandigarh – 160011</li>
+        <li><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 11.41 19a19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg><a href="tel:+918437043234">+91 84370 43234</a></li>
+        <li><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>08:30 AM – 11:30 PM (All Days)</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">&copy; 2024 Café JC's. All rights reserved.</div>
+</footer>
+
+<script src="main.js" defer></script>
+</body>
+</html>

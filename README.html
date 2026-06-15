@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Setup Guide — Café JC's</title>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root { --teal: #2A7C6F; --ink: #1A1208; --cream: #F5EFE0; --muted: #6B7C74; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Jost', sans-serif; background: #f5f5f5; color: var(--ink); line-height: 1.7; }
+    .container { max-width: 800px; margin: 0 auto; padding: 3rem 2rem; }
+    h1 { font-size: 2rem; color: var(--teal); margin-bottom: 0.5rem; }
+    h2 { font-size: 1.2rem; margin: 2rem 0 0.8rem; color: var(--ink); border-left: 3px solid var(--teal); padding-left: 1rem; }
+    h3 { font-size: 1rem; margin: 1.5rem 0 0.5rem; color: var(--teal); }
+    p, li { font-size: 0.92rem; color: #444; margin-bottom: 0.5rem; }
+    ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+    li { margin-bottom: 0.4rem; }
+    code {
+      background: #1e1e1e;
+      color: #4EC9B0;
+      padding: 0.15rem 0.5rem;
+      font-family: monospace;
+      font-size: 0.85rem;
+      border-radius: 3px;
+    }
+    pre {
+      background: #1e1e1e;
+      color: #d4d4d4;
+      padding: 1.5rem;
+      overflow-x: auto;
+      margin: 1rem 0;
+      font-family: monospace;
+      font-size: 0.82rem;
+      line-height: 1.6;
+      border-radius: 4px;
+    }
+    pre .k { color: #569CD6; }
+    pre .s { color: #CE9178; }
+    pre .c { color: #6A9955; }
+    pre .f { color: #DCDCAA; }
+    pre .v { color: #9CDCFE; }
+    .step {
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      border-radius: 4px;
+    }
+    .step-num {
+      display: inline-block;
+      background: var(--teal);
+      color: #fff;
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 28px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      margin-right: 0.5rem;
+    }
+    .step h3 { margin-top: 0; display: inline; }
+    .note {
+      background: #FFF8E1;
+      border-left: 4px solid #F9A825;
+      padding: 1rem 1.5rem;
+      margin: 1rem 0;
+      font-size: 0.88rem;
+    }
+    .success {
+      background: #E8F5E9;
+      border-left: 4px solid #27AE60;
+      padding: 1rem 1.5rem;
+      margin: 1rem 0;
+      font-size: 0.88rem;
+    }
+    a { color: var(--teal); }
+    .tag { background: var(--teal); color: #fff; padding: 0.2rem 0.6rem; font-size: 0.72rem; font-weight: 600; border-radius: 2px; }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <h1>⚙️ Café JC's — Setup Guide</h1>
+  <p>Google Sheets ko backend se connect karna — <strong>5 minute ka kaam, ek baar karna hai</strong>.</p>
+
+  <div class="success">
+    ✅ <strong>Kya milega:</strong> Reservation form submit → Google Sheets mein save → Customer ko email → Admin panel mein dikhe
+  </div>
+
+  <h2>Part 1 — Google Sheet Banao</h2>
+
+  <div class="step">
+    <span class="step-num">1</span>
+    <h3>Google Sheets kholke naya sheet banao</h3>
+    <p>👉 <a href="https://sheets.new" target="_blank">sheets.new</a> par jao → ek nayi sheet khulegi</p>
+    <p>Name rakho: <code>Café JC's Reservations</code></p>
+  </div>
+
+  <div class="step">
+    <span class="step-num">2</span>
+    <h3>Pehli row mein ye headers daalo (exact same)</h3>
+    <pre>ID | Timestamp | First Name | Last Name | Email | Phone | Date | Time | Guests | Seating | Notes | Status</pre>
+    <p>Row 1 mein A se L tak — ek ek column mein.</p>
+  </div>
+
+  <h2>Part 2 — Apps Script Lagao</h2>
+
+  <div class="step">
+    <span class="step-num">3</span>
+    <h3>Extensions → Apps Script kholо</h3>
+    <p>Sheet mein upar <strong>Extensions</strong> menu → <strong>Apps Script</strong> click karo</p>
+  </div>
+
+  <div class="step">
+    <span class="step-num">4</span>
+    <h3>Ye poora code paste karo (purana delete karke)</h3>
+    <pre><span class="c">// Café JC's — Google Apps Script</span>
+<span class="c">// Apni sheet ID aur email yahan set karo:</span>
+
+<span class="k">const</span> <span class="v">SHEET_NAME</span> = <span class="s">'Sheet1'</span>;
+<span class="k">const</span> <span class="v">OWNER_EMAIL</span> = <span class="s">'kartarsaini305@gmail.com'</span>; <span class="c">// ← Yahan apni email</span>
+<span class="k">const</span> <span class="v">CAFE_NAME</span>   = <span class="s">'Café JC\'s'</span>;
+
+<span class="k">function</span> <span class="f">doGet</span>(e) {
+  <span class="k">const</span> <span class="v">action</span> = e.parameter.action;
+  
+  <span class="k">if</span> (action === <span class="s">'get'</span>) <span class="k">return</span> <span class="f">getBookings</span>();
+  <span class="k">if</span> (action === <span class="s">'updateStatus'</span>) <span class="k">return</span> <span class="f">updateStatus</span>(e.parameter.id, e.parameter.status);
+  
+  <span class="k">return</span> ContentService.<span class="f">createTextOutput</span>(<span class="s">'OK'</span>);
+}
+
+<span class="k">function</span> <span class="f">doPost</span>(e) {
+  <span class="k">try</span> {
+    <span class="k">const</span> <span class="v">data</span> = JSON.<span class="f">parse</span>(e.postData.contents);
+    <span class="k">const</span> <span class="v">sheet</span> = SpreadsheetApp.<span class="f">getActiveSpreadsheet</span>().<span class="f">getSheetByName</span>(SHEET_NAME);
+    <span class="k">const</span> <span class="v">id</span>    = sheet.<span class="f">getLastRow</span>();
+    <span class="k">const</span> <span class="v">time</span>  = <span class="k">new</span> <span class="f">Date</span>().<span class="f">toLocaleString</span>(<span class="s">'en-IN'</span>);
+    
+    sheet.<span class="f">appendRow</span>([
+      id, time,
+      data.fname, data.lname, data.email, data.phone,
+      data.date, data.time, data.guests, data.seating,
+      data.notes, <span class="s">'pending'</span>
+    ]);
+    
+    <span class="c">// Owner ko email</span>
+    <span class="f">sendOwnerEmail</span>(data, id);
+    <span class="c">// Customer ko email</span>
+    <span class="k">if</span> (data.email) <span class="f">sendCustomerEmail</span>(data);
+    
+    <span class="k">return</span> ContentService
+      .<span class="f">createTextOutput</span>(JSON.<span class="f">stringify</span>({success: <span class="k">true</span>, id: id}))
+      .<span class="f">setMimeType</span>(ContentService.MimeType.JSON);
+      
+  } <span class="k">catch</span>(err) {
+    <span class="k">return</span> ContentService
+      .<span class="f">createTextOutput</span>(JSON.<span class="f">stringify</span>({success: <span class="k">false</span>, error: err.message}))
+      .<span class="f">setMimeType</span>(ContentService.MimeType.JSON);
+  }
+}
+
+<span class="k">function</span> <span class="f">getBookings</span>() {
+  <span class="k">const</span> <span class="v">sheet</span>  = SpreadsheetApp.<span class="f">getActiveSpreadsheet</span>().<span class="f">getSheetByName</span>(SHEET_NAME);
+  <span class="k">const</span> <span class="v">rows</span>   = sheet.<span class="f">getDataRange</span>().<span class="f">getValues</span>();
+  <span class="k">const</span> <span class="v">bookings</span> = rows.<span class="f">slice</span>(1).<span class="f">map</span>(r => ({
+    id: r[0], submitted: r[1],
+    fname: r[2], lname: r[3], email: r[4], phone: r[5],
+    date: r[6], time: r[7], guests: r[8],
+    seating: r[9], notes: r[10], status: r[11]
+  }));
+  <span class="k">return</span> ContentService
+    .<span class="f">createTextOutput</span>(JSON.<span class="f">stringify</span>({bookings}))
+    .<span class="f">setMimeType</span>(ContentService.MimeType.JSON);
+}
+
+<span class="k">function</span> <span class="f">updateStatus</span>(id, status) {
+  <span class="k">const</span> <span class="v">sheet</span> = SpreadsheetApp.<span class="f">getActiveSpreadsheet</span>().<span class="f">getSheetByName</span>(SHEET_NAME);
+  <span class="k">const</span> <span class="v">data</span>  = sheet.<span class="f">getDataRange</span>().<span class="f">getValues</span>();
+  <span class="k">for</span> (<span class="k">let</span> i = 1; i < data.length; i++) {
+    <span class="k">if</span> (String(data[i][0]) === String(id)) {
+      sheet.<span class="f">getRange</span>(i + 1, 12).<span class="f">setValue</span>(status);
+      <span class="k">break</span>;
+    }
+  }
+  <span class="k">return</span> ContentService.<span class="f">createTextOutput</span>(<span class="s">'OK'</span>);
+}
+
+<span class="k">function</span> <span class="f">sendOwnerEmail</span>(data, id) {
+  <span class="k">const</span> <span class="v">subject</span> = <span class="s">`🔔 Nayi Booking #${id} — ${data.fname} ${data.lname} | ${data.date} ${data.time}`</span>;
+  <span class="k">const</span> <span class="v">body</span> = <span class="s">`
+Nayi reservation aayi hai!
+
+Naam:    ${data.fname} ${data.lname}
+Phone:   ${data.phone}
+Email:   ${data.email}
+Date:    ${data.date}
+Time:    ${data.time}
+Guests:  ${data.guests}
+Seating: ${data.seating}
+Notes:   ${data.notes || 'Koi nahi'}
+
+Admin panel mein dekho: admin.html
+  `</span>;
+  MailApp.<span class="f">sendEmail</span>(OWNER_EMAIL, subject, body);
+}
+
+<span class="k">function</span> <span class="f">sendCustomerEmail</span>(data) {
+  <span class="k">const</span> <span class="v">subject</span> = <span class="s">`✅ Booking Received — ${CAFE_NAME}`</span>;
+  <span class="k">const</span> <span class="v">body</span> = <span class="s">`
+Namaste ${data.fname}!
+
+Aapki reservation request hamein mil gayi hai. Hum jald hi confirm karenge.
+
+Booking Details:
+━━━━━━━━━━━━━━━
+📅 Date:    ${data.date}
+⏰ Time:    ${data.time}
+👥 Guests:  ${data.guests}
+🪑 Seating: ${data.seating}
+━━━━━━━━━━━━━━━
+
+Koi sawaal ho to call karein: +91 84370 43234
+
+Hum aapka intezaar kar rahe hain! 🙏
+
+— Team ${CAFE_NAME}
+📍 Coal Depot Complex, Sector 10D, Chandigarh
+  `</span>;
+  MailApp.<span class="f">sendEmail</span>(data.email, subject, body);
+}
+</pre>
+  </div>
+
+  <div class="step">
+    <span class="step-num">5</span>
+    <h3>Deploy karo</h3>
+    <ol>
+      <li>Upar <strong>Deploy</strong> button → <strong>New Deployment</strong></li>
+      <li>Type: <strong>Web App</strong> choose karo</li>
+      <li>Execute as: <strong>Me</strong></li>
+      <li>Who has access: <strong>Anyone</strong></li>
+      <li><strong>Deploy</strong> click karo → Permission allow karo</li>
+      <li>Ek <strong>URL milegi</strong> — copy karo ✅</li>
+    </ol>
+  </div>
+
+  <h2>Part 3 — config.js Update Karo</h2>
+
+  <div class="step">
+    <span class="step-num">6</span>
+    <h3>config.js mein URL paste karo</h3>
+    <p>File <code>config.js</code> kholо aur ye line update karo:</p>
+    <pre>GOOGLE_SCRIPT_URL: <span class="s">'https://script.google.com/macros/s/YOUR_ID/exec'</span>,</pre>
+    <p>Wahan jo URL mili thi Deploy se, woh paste karo.</p>
+  </div>
+
+  <div class="success">
+    🎉 <strong>Ho gaya!</strong> Ab reservation form submit hone par:<br>
+    ✅ Google Sheets mein data save hoga<br>
+    ✅ Owner ko email aayegi<br>
+    ✅ Customer ko confirmation email aayegi<br>
+    ✅ Admin panel mein dikhai dega
+  </div>
+
+  <h2>Client Change Karna Ho To</h2>
+  <p>Sirf <code>config.js</code> file mein ye update karo:</p>
+  <ul>
+    <li><code>OWNER_EMAIL</code> → Client ki email</li>
+    <li><code>CAFE_WHATSAPP</code> → Client ka WhatsApp number</li>
+    <li><code>ADMIN_PASSWORD</code> → Naya password</li>
+    <li><code>GOOGLE_SCRIPT_URL</code> → Naya Apps Script URL (agar nayi sheet)</li>
+  </ul>
+
+  <div class="note">
+    💡 <strong>Apps Script mein bhi</strong> <code>OWNER_EMAIL</code> update karna mat bhoolo — woh alag file hai.
+  </div>
+
+  <p style="margin-top:2rem; color: var(--muted); font-size:0.82rem;">Café JC's Website — Setup Guide v1.0</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reservations — Café JC's | Book Your Table</title>
+  <meta name="description" content="Reserve your table at Café JC's, Chandigarh. Book online or call +91 84370 43234.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,600;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .res-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 5rem;
+      align-items: start;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .res-info { padding-top: 1rem; }
+    .res-highlights { margin: 2rem 0; display: flex; flex-direction: column; gap: 1.2rem; }
+    .res-highlight { display: flex; align-items: flex-start; gap: 1rem; }
+    .res-highlight svg { width: 20px; height: 20px; stroke: var(--teal); stroke-width: 1.5; stroke-linecap: round; fill: none; flex-shrink: 0; margin-top: 3px; }
+    .res-highlight-text h5 { font-size: 0.88rem; font-weight: 600; margin-bottom: 0.2rem; }
+    .res-highlight-text p { font-size: 0.82rem; color: var(--muted); }
+    .res-form-card {
+      background: var(--cream);
+      padding: 3rem;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media(max-width: 900px) {
+      .res-layout { grid-template-columns: 1fr; gap: 3rem; }
+      .res-form-card { padding: 2rem; }
+    }
+    @media(max-width: 480px) {
+      .form-row { grid-template-columns: 1fr; }
+    }
+    .confirm-icon { margin: 0 auto 1.5rem; }
+    .confirm-icon svg { width: 72px; height: 72px; stroke: var(--teal); stroke-width: 1.2; fill: none; }
+    .confirm-detail { background: var(--ivory); padding: 1.5rem; margin: 1.5rem 0; text-align: left; font-size: 0.88rem; }
+    .confirm-detail p { color: var(--ink); margin-bottom: 0.4rem; }
+    .confirm-detail strong { color: var(--teal); }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <a href="index.html" class="nav-logo">CAFÉ <span>JC's</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="menu.html">Menu</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="visit.html">Visit</a></li>
+    <li><a href="reservations.html">Reserve</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="tel:+918437043234" class="nav-phone">+91 84370 43234</a>
+    <a href="reservations.html" class="btn-nav">Reserve a Table</a>
+  </div>
+  <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="nav-overlay"></div>
+<div class="nav-drawer">
+  <a href="index.html">Home</a>
+  <a href="menu.html">Menu</a>
+  <a href="gallery.html">Gallery</a>
+  <a href="about.html">About</a>
+  <a href="visit.html">Visit</a>
+  <a href="reservations.html">Reserve</a>
+  <a href="tel:+918437043234" class="drawer-phone">+91 84370 43234</a>
+  <a href="reservations.html" class="btn-drawer">Reserve a Table</a>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="hero-bg" style="background-image: url('https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/9a/3b/74/patio-seating.jpg?w=1400&h=-1&s=1');"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="hero-eyebrow">Your Table Awaits</span>
+    <h1>Make a Reservation</h1>
+    <div class="hero-divider"></div>
+  </div>
+</section>
+
+<!-- RESERVATION SECTION -->
+<section class="section">
+  <div class="res-layout">
+
+    <!-- Left: Info -->
+    <div class="res-info reveal">
+      <span class="eyebrow">Before You Book</span>
+      <h2>A Seat in the Garden or Inside — Your Choice</h2>
+      <div class="divider-left"></div>
+      <p style="margin-bottom:1rem;">Walk-ins are always warmly welcomed, but reserving ahead ensures your preferred spot — whether that's a cozy indoor nook or a table under the open garden sky.</p>
+
+      <div class="res-highlights">
+        <div class="res-highlight">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <div class="res-highlight-text">
+            <h5>Operating Hours</h5>
+            <p>08:30 AM to 11:30 PM, every day of the week.</p>
+          </div>
+        </div>
+        <div class="res-highlight">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <div class="res-highlight-text">
+            <h5>Group Bookings</h5>
+            <p>Planning for 6 or more? Call us directly for large group arrangements.</p>
+          </div>
+        </div>
+        <div class="res-highlight">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <div class="res-highlight-text">
+            <h5>Seating Preference</h5>
+            <p>Mention if you'd prefer indoor (with book corner) or the outdoor garden patio.</p>
+          </div>
+        </div>
+        <div class="res-highlight">
+          <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          <div class="res-highlight-text">
+            <h5>Pet-Friendly</h5>
+            <p>Bringing your pet? Just let us know in special requests — we'll have their spot ready too.</p>
+          </div>
+        </div>
+        <div class="res-highlight">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 11.41 19a19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <div class="res-highlight-text">
+            <h5>Call Directly</h5>
+            <p><a href="tel:+918437043234" style="color:var(--teal); font-weight:600;">+91 84370 43234</a> — for same-day bookings or special requests.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mini gallery -->
+      <div class="gallery-grid row-3" style="gap:0.5rem;">
+        <div class="gallery-item" style="aspect-ratio:1; cursor:default;">
+          <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/9a/3a/c4/indoor-setting-also-available.jpg?w=1400&h=800&s=1" alt="Indoor" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+        </div>
+        <div class="gallery-item" style="aspect-ratio:1; cursor:default;">
+          <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/9a/3b/74/patio-seating.jpg?w=1400&h=-1&s=1" alt="Patio" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+        </div>
+        <div class="gallery-item" style="aspect-ratio:1; cursor:default;">
+          <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/9a/3a/2f/well-ventilated.jpg?w=1400&h=-1&s=1" alt="Interior" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Form card -->
+    <div class="reveal reveal-delay-1">
+      <div class="res-form-card">
+        <span class="eyebrow">Book Your Spot</span>
+        <h3 style="margin-bottom:0.5rem;">Reserve a Table</h3>
+        <p style="margin-bottom:2rem; font-size:0.85rem;">Fill in the details below and we'll confirm your reservation promptly.</p>
+
+        <form id="reservation-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="r-fname">First Name *</label>
+              <input type="text" id="r-fname" name="fname" placeholder="Rahul" required>
+            </div>
+            <div class="form-group">
+              <label for="r-lname">Last Name *</label>
+              <input type="text" id="r-lname" name="lname" placeholder="Sharma" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="r-email">Email Address *</label>
+            <input type="email" id="r-email" name="email" placeholder="hello@example.com" required>
+          </div>
+          <div class="form-group">
+            <label for="r-phone">Phone Number *</label>
+            <input type="tel" id="r-phone" name="phone" placeholder="+91 98765 43210" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="r-date">Date *</label>
+              <input type="date" id="r-date" name="date" required>
+            </div>
+            <div class="form-group">
+              <label for="r-time">Time *</label>
+              <select id="r-time" name="time" required>
+                <option value="">Select time</option>
+                <option>08:30 AM</option>
+                <option>09:00 AM</option>
+                <option>09:30 AM</option>
+                <option>10:00 AM</option>
+                <option>11:00 AM</option>
+                <option>12:00 PM</option>
+                <option>01:00 PM</option>
+                <option>02:00 PM</option>
+                <option>03:00 PM</option>
+                <option>04:00 PM</option>
+                <option>05:00 PM</option>
+                <option>06:00 PM</option>
+                <option>07:00 PM</option>
+                <option>07:30 PM</option>
+                <option>08:00 PM</option>
+                <option>08:30 PM</option>
+                <option>09:00 PM</option>
+                <option>09:30 PM</option>
+                <option>10:00 PM</option>
+                <option>10:30 PM</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="r-guests">Number of Guests *</label>
+              <select id="r-guests" name="guests" required>
+                <option value="">Select</option>
+                <option>1 Guest</option>
+                <option>2 Guests</option>
+                <option>3 Guests</option>
+                <option>4 Guests</option>
+                <option>5 Guests</option>
+                <option>6 Guests</option>
+                <option>7+ Guests (call us)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="r-seating">Seating Preference</label>
+              <select id="r-seating" name="seating">
+                <option value="">No Preference</option>
+                <option>Indoor (Book Corner)</option>
+                <option>Outdoor (Garden Patio)</option>
+                <option>Window Side</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="r-notes">Special Requests</label>
+            <textarea id="r-notes" name="notes" placeholder="Dietary requirements, birthday celebration, bringing a pet, occasion details…"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%; padding:1rem;">Confirm Reservation</button>
+          <p style="font-size:0.75rem; text-align:center; margin-top:1rem; opacity:0.6;">Or call us at <a href="tel:+918437043234" style="color:var(--teal);">+91 84370 43234</a> for immediate assistance.</p>
+        </form>
+
+        <div id="reservation-confirm" style="display:none;">
+          <div class="confirm-card">
+            <div class="confirm-icon">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="9 12 11 14 15 10" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h2>Reservation Confirmed!</h2>
+            <p>Thank you! We've received your booking request. You'll get a confirmation call from us shortly.</p>
+            <div class="confirm-detail">
+              <p><strong>📍 Location:</strong> Coal Depot Complex, Sector 10D, Chandigarh</p>
+              <p><strong>📞 Questions?</strong> Call +91 84370 43234</p>
+              <p><strong>⏰ Hours:</strong> 08:30 AM – 11:30 PM (All Days)</p>
+            </div>
+            <a href="menu.html" class="btn btn-primary" style="margin-top:0.5rem;">Browse Our Menu</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ORDER ONLINE STRIP -->
+<section class="section section-dark" style="padding:3rem 2.5rem;">
+  <div class="container" style="text-align:center;" class="reveal">
+    <span class="eyebrow" style="color:var(--teal-light);">Can't Make It In?</span>
+    <h3 style="color:var(--cream); margin-bottom:1.5rem;">Order Online from Café JC's</h3>
+    <div class="order-platforms">
+      <a href="https://www.zomato.com/chandigarh/cafe-jcs-sector-10/order" target="_blank" rel="noopener noreferrer" class="platform-btn">Order on Zomato</a>
+      <a href="https://www.swiggy.com/restaurants/cafe-jcs-sector-10-chandigarh-41453" target="_blank" rel="noopener noreferrer" class="platform-btn">Order on Swiggy</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo">CAFÉ <span>JC's</span></div>
+      <p class="footer-tagline">Chandigarh's most aesthetic culinary escape.</p>
+      <div class="footer-social">
+        <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+        <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+      </div>
+    </div>
+    <div>
+      <h4>Navigate</h4>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="menu.html">Our Menu</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="visit.html">Visit + Contact</a></li>
+        <li><a href="reservations.html">Reservations</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <ul class="footer-info">
+        <li><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Coal Depot Complex, Sector 10D, Chandigarh – 160011</li>
+        <li><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 11.41 19a19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg><a href="tel:+918437043234">+91 84370 43234</a></li>
+        <li><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>08:30 AM – 11:30 PM (All Days)</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">&copy; 2024 Café JC's. All rights reserved.</div>
+</footer>
+
+<script src="config.js"></script>
+<script src="main.js" defer></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Min date set
+    const dateInput = document.getElementById('r-date');
+    if (dateInput) {
+      dateInput.setAttribute('min', new Date().toISOString().split('T')[0]);
+    }
+
+    // Form submit handler
+    const form = document.getElementById('reservation-form');
+    if (!form) return;
+
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const submitBtn = form.querySelector('button[type="submit"]');
+      submitBtn.textContent = 'Submitting…';
+      submitBtn.disabled = true;
+
+      const data = {
+        fname:   document.getElementById('r-fname').value.trim(),
+        lname:   document.getElementById('r-lname').value.trim(),
+        email:   document.getElementById('r-email').value.trim(),
+        phone:   document.getElementById('r-phone').value.trim(),
+        date:    document.getElementById('r-date').value,
+        time:    document.getElementById('r-time').value,
+        guests:  document.getElementById('r-guests').value,
+        seating: document.getElementById('r-seating').value,
+        notes:   document.getElementById('r-notes').value.trim(),
+      };
+
+      // 1. Save to local storage (always works as backup)
+      const existing = JSON.parse(localStorage.getItem('cafe_bookings') || '[]');
+      const newBooking = { ...data, id: Date.now(), status: 'pending', submitted: new Date().toLocaleString('en-IN') };
+      existing.push(newBooking);
+      localStorage.setItem('cafe_bookings', JSON.stringify(existing));
+
+      // 2. Try Google Sheets
+      const scriptUrl = CAFE_CONFIG.GOOGLE_SCRIPT_URL;
+      const isConnected = scriptUrl && scriptUrl !== 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+
+      if (isConnected) {
+        try {
+          await fetch(scriptUrl, {
+            method: 'POST',
+            body: JSON.stringify(data),
+          });
+        } catch (err) {
+          console.log('Google Sheets offline, data saved locally.');
+        }
+      }
+
+      // 3. WhatsApp notification to owner
+      const waMsg = encodeURIComponent(
+        `🔔 *Nayi Reservation — ${CAFE_CONFIG.CAFE_NAME}*\n\n` +
+        `👤 *Naam:* ${data.fname} ${data.lname}\n` +
+        `📞 *Phone:* ${data.phone}\n` +
+        `📧 *Email:* ${data.email}\n` +
+        `📅 *Date:* ${data.date}\n` +
+        `⏰ *Time:* ${data.time}\n` +
+        `👥 *Guests:* ${data.guests}\n` +
+        `🪑 *Seating:* ${data.seating || 'No Preference'}\n` +
+        `📝 *Notes:* ${data.notes || 'Koi nahi'}`
+      );
+      const waUrl = `https://wa.me/${CAFE_CONFIG.CAFE_WHATSAPP}?text=${waMsg}`;
+
+      // Show confirmation
+      form.style.display = 'none';
+      const confirm = document.getElementById('reservation-confirm');
+      if (confirm) {
+        confirm.style.display = 'block';
+        // Add WhatsApp button to confirmation
+        const waBtn = document.createElement('a');
+        waBtn.href = waUrl;
+        waBtn.target = '_blank';
+        waBtn.rel = 'noopener noreferrer';
+        waBtn.className = 'btn';
+        waBtn.style.cssText = 'background:#25D366;color:#fff;margin-top:0.8rem;display:inline-block;';
+        waBtn.textContent = '💬 WhatsApp Par Confirm Karo';
+        confirm.querySelector('.confirm-card').appendChild(waBtn);
+      }
+    });
+  });
+</script>
+</body>
+</html>

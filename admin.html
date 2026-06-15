@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin — Café JC's Reservations</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --teal: #2A7C6F;
+      --teal-light: #3D9E8F;
+      --ink: #1A1208;
+      --cream: #F5EFE0;
+      --ivory: #FAF7F0;
+      --muted: #6B7C74;
+      --deep: #0F1A18;
+      --gold: #B8862C;
+      --red: #C0392B;
+      --green: #27AE60;
+      --orange: #E67E22;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Jost', sans-serif; background: #f0f4f3; color: var(--ink); min-height: 100vh; }
+    a { text-decoration: none; color: inherit; }
+
+    /* LOGIN SCREEN */
+    .login-screen {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--deep);
+      padding: 1rem;
+    }
+    .login-card {
+      background: var(--ivory);
+      padding: 3rem 2.5rem;
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+    .login-logo {
+      font-family: 'Cormorant', serif;
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 0.3rem;
+    }
+    .login-logo span { color: var(--teal); }
+    .login-sub { font-size: 0.78rem; color: var(--muted); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 2rem; }
+    .login-card input {
+      width: 100%;
+      padding: 0.9rem 1rem;
+      font-size: 1rem;
+      font-family: 'Jost', sans-serif;
+      border: 1.5px solid #ddd;
+      background: #fff;
+      margin-bottom: 1rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .login-card input:focus { border-color: var(--teal); }
+    .login-btn {
+      width: 100%;
+      padding: 0.9rem;
+      background: var(--teal);
+      color: var(--cream);
+      border: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .login-btn:hover { background: var(--teal-light); }
+    .login-error {
+      color: var(--red);
+      font-size: 0.82rem;
+      margin-top: 0.8rem;
+      display: none;
+    }
+
+    /* ADMIN LAYOUT */
+    .admin-layout { display: none; min-height: 100vh; }
+    .admin-layout.visible { display: block; }
+
+    /* TOP BAR */
+    .topbar {
+      background: var(--deep);
+      padding: 0 2rem;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .topbar-logo {
+      font-family: 'Cormorant', serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--cream);
+    }
+    .topbar-logo span { color: var(--teal-light); }
+    .topbar-right { display: flex; align-items: center; gap: 1rem; }
+    .topbar-badge {
+      font-size: 0.72rem;
+      background: var(--teal);
+      color: var(--cream);
+      padding: 0.3rem 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .logout-btn {
+      font-size: 0.75rem;
+      color: rgba(245,239,224,0.6);
+      cursor: pointer;
+      background: none;
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 0.3rem 0.8rem;
+      transition: all 0.2s;
+    }
+    .logout-btn:hover { color: var(--cream); border-color: var(--cream); }
+
+    /* MAIN CONTENT */
+    .admin-main { padding: 2rem; max-width: 1400px; margin: 0 auto; }
+
+    /* STATS ROW */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .stat-card {
+      background: #fff;
+      padding: 1.5rem;
+      border-left: 3px solid var(--teal);
+    }
+    .stat-card.pending { border-color: var(--orange); }
+    .stat-card.confirmed { border-color: var(--green); }
+    .stat-card.cancelled { border-color: var(--red); }
+    .stat-num {
+      font-family: 'Cormorant', serif;
+      font-size: 2.2rem;
+      font-weight: 600;
+      color: var(--teal);
+      display: block;
+      line-height: 1;
+    }
+    .stat-card.pending .stat-num { color: var(--orange); }
+    .stat-card.confirmed .stat-num { color: var(--green); }
+    .stat-card.cancelled .stat-num { color: var(--red); }
+    .stat-label { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-top: 0.4rem; }
+
+    /* FILTER BAR */
+    .filter-bar {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .filter-bar input, .filter-bar select {
+      padding: 0.6rem 1rem;
+      font-size: 0.85rem;
+      font-family: 'Jost', sans-serif;
+      border: 1.5px solid #ddd;
+      background: #fff;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .filter-bar input:focus, .filter-bar select:focus { border-color: var(--teal); }
+    .filter-bar input { flex: 1; min-width: 200px; }
+    .refresh-btn {
+      padding: 0.6rem 1.2rem;
+      background: var(--teal);
+      color: var(--cream);
+      border: none;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+    .refresh-btn:hover { background: var(--teal-light); }
+
+    /* TABLE */
+    .table-wrap {
+      background: #fff;
+      overflow-x: auto;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    table { width: 100%; border-collapse: collapse; min-width: 900px; }
+    thead tr { background: var(--deep); }
+    thead th {
+      padding: 1rem 1.2rem;
+      text-align: left;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--cream);
+      white-space: nowrap;
+    }
+    tbody tr {
+      border-bottom: 1px solid #f0f0f0;
+      transition: background 0.15s;
+    }
+    tbody tr:hover { background: #f8faf9; }
+    tbody td {
+      padding: 1rem 1.2rem;
+      font-size: 0.85rem;
+      vertical-align: middle;
+    }
+    .td-name { font-weight: 600; }
+    .td-phone a { color: var(--teal); }
+    .td-notes { max-width: 180px; font-size: 0.78rem; color: var(--muted); }
+
+    /* STATUS BADGES */
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.7rem;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-radius: 2px;
+    }
+    .badge-pending  { background: #FFF3E0; color: var(--orange); }
+    .badge-confirmed { background: #E8F5E9; color: var(--green); }
+    .badge-cancelled { background: #FFEBEE; color: var(--red); }
+
+    /* ACTION BUTTONS */
+    .action-btns { display: flex; gap: 0.4rem; }
+    .action-btn {
+      padding: 0.35rem 0.7rem;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .action-btn:hover { opacity: 0.8; }
+    .btn-confirm { background: var(--green); color: #fff; }
+    .btn-cancel  { background: var(--red); color: #fff; }
+    .btn-delete  { background: #eee; color: var(--muted); }
+    .btn-wa      { background: #25D366; color: #fff; }
+
+    /* EMPTY STATE */
+    .empty-state {
+      text-align: center;
+      padding: 4rem 2rem;
+      color: var(--muted);
+    }
+    .empty-state svg { width: 48px; height: 48px; stroke: #ccc; stroke-width: 1.5; fill: none; margin: 0 auto 1rem; }
+
+    /* LOADING */
+    .loading {
+      text-align: center;
+      padding: 3rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    .spinner {
+      width: 32px; height: 32px;
+      border: 2px solid #ddd;
+      border-top-color: var(--teal);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 1rem;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* SETUP NOTICE */
+    .setup-notice {
+      background: #FFF8E1;
+      border-left: 4px solid var(--gold);
+      padding: 1rem 1.5rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.85rem;
+    }
+    .setup-notice strong { color: var(--gold); }
+    .setup-notice a { color: var(--teal); font-weight: 600; }
+
+    /* MODAL */
+    .modal-overlay {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 500;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: #fff;
+      padding: 2rem;
+      max-width: 500px;
+      width: 100%;
+    }
+    .modal h3 { margin-bottom: 1rem; }
+    .modal p { font-size: 0.88rem; color: var(--muted); margin-bottom: 0.5rem; }
+    .modal p strong { color: var(--ink); }
+    .modal-actions { display: flex; gap: 0.8rem; margin-top: 1.5rem; }
+    .modal-close { padding: 0.7rem 1.5rem; background: #eee; border: none; cursor: pointer; font-size: 0.82rem; font-weight: 600; }
+
+    /* RESPONSIVE */
+    @media(max-width: 768px) {
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+      .admin-main { padding: 1rem; }
+      .topbar { padding: 0 1rem; }
+    }
+    @media(max-width: 480px) {
+      .stats-row { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- LOGIN SCREEN -->
+<div class="login-screen" id="login-screen">
+  <div class="login-card">
+    <div class="login-logo">CAFÉ <span>JC's</span></div>
+    <p class="login-sub">Admin Panel</p>
+    <input type="password" id="password-input" placeholder="Enter admin password" autocomplete="current-password">
+    <button class="login-btn" onclick="doLogin()">Login</button>
+    <p class="login-error" id="login-error">❌ Galat password hai. Try again.</p>
+  </div>
+</div>
+
+<!-- ADMIN LAYOUT -->
+<div class="admin-layout" id="admin-layout">
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="topbar-logo">CAFÉ <span>JC's</span></div>
+    <div class="topbar-right">
+      <span class="topbar-badge">Admin Panel</span>
+      <button class="logout-btn" onclick="doLogout()">Logout</button>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="admin-main">
+
+    <!-- Setup notice -->
+    <div class="setup-notice" id="setup-notice">
+      <strong>⚙️ Setup Required:</strong> Google Apps Script abhi connect nahi hua.
+      <a href="README.html" target="_blank">README dekho</a> — 5 minute mein setup ho jayega.
+      Tab tak demo data dikh raha hai.
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-row">
+      <div class="stat-card">
+        <span class="stat-num" id="stat-total">0</span>
+        <div class="stat-label">Total Bookings</div>
+      </div>
+      <div class="stat-card pending">
+        <span class="stat-num" id="stat-pending">0</span>
+        <div class="stat-label">Pending</div>
+      </div>
+      <div class="stat-card confirmed">
+        <span class="stat-num" id="stat-confirmed">0</span>
+        <div class="stat-label">Confirmed</div>
+      </div>
+      <div class="stat-card cancelled">
+        <span class="stat-num" id="stat-cancelled">0</span>
+        <div class="stat-label">Cancelled</div>
+      </div>
+    </div>
+
+    <!-- Filter bar -->
+    <div class="filter-bar">
+      <input type="text" id="search-input" placeholder="🔍  Naam, phone ya email search karo…" oninput="filterBookings()">
+      <select id="status-filter" onchange="filterBookings()">
+        <option value="all">All Status</option>
+        <option value="pending">Pending</option>
+        <option value="confirmed">Confirmed</option>
+        <option value="cancelled">Cancelled</option>
+      </select>
+      <select id="date-filter" onchange="filterBookings()">
+        <option value="all">All Dates</option>
+        <option value="today">Aaj</option>
+        <option value="tomorrow">Kal</option>
+        <option value="week">Is Hafte</option>
+      </select>
+      <button class="refresh-btn" onclick="loadBookings()">↻ Refresh</button>
+    </div>
+
+    <!-- Table -->
+    <div class="table-wrap">
+      <div class="loading" id="table-loading">
+        <div class="spinner"></div>
+        Bookings load ho rahi hain…
+      </div>
+      <table id="bookings-table" style="display:none;">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Naam</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Guests</th>
+            <th>Seating</th>
+            <th>Notes</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="bookings-tbody"></tbody>
+      </table>
+      <div class="empty-state" id="empty-state" style="display:none;">
+        <svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/></svg>
+        <p>Koi booking nahi mili.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DETAIL MODAL -->
+<div class="modal-overlay" id="detail-modal">
+  <div class="modal">
+    <h3>Booking Details</h3>
+    <div id="modal-content"></div>
+    <div class="modal-actions">
+      <button class="action-btn btn-confirm" id="modal-confirm-btn">✅ Confirm</button>
+      <button class="action-btn btn-cancel"  id="modal-cancel-btn">❌ Cancel</button>
+      <button class="modal-close" onclick="closeModal()">Close</button>
+    </div>
+  </div>
+</div>
+
+<script src="config.js"></script>
+<script>
+// ── AUTH ─────────────────────────────────────────────────────
+function doLogin() {
+  const pwd = document.getElementById('password-input').value;
+  if (pwd === CAFE_CONFIG.ADMIN_PASSWORD) {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('admin-layout').classList.add('visible');
+    sessionStorage.setItem('admin_auth', 'true');
+    loadBookings();
+  } else {
+    document.getElementById('login-error').style.display = 'block';
+  }
+}
+function doLogout() {
+  sessionStorage.removeItem('admin_auth');
+  location.reload();
+}
+document.getElementById('password-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') doLogin();
+});
+// Auto-login if session active
+if (sessionStorage.getItem('admin_auth') === 'true') {
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('admin-layout').classList.add('visible');
+  setTimeout(loadBookings, 100);
+}
+
+// ── DATA ─────────────────────────────────────────────────────
+// Local storage as fallback when Google Script not connected
+let allBookings = [];
+
+const DEMO_BOOKINGS = [
+  { id: 1, fname: 'Rahul', lname: 'Sharma', phone: '+91 98765 43210', email: 'rahul@example.com', date: '2024-06-20', time: '07:00 PM', guests: '2 Guests', seating: 'Garden Patio', notes: 'Anniversary dinner 🎉', status: 'confirmed', submitted: '2024-06-18 10:30' },
+  { id: 2, fname: 'Priya',  lname: 'Verma',  phone: '+91 87654 32109', email: 'priya@example.com',  date: '2024-06-21', time: '08:00 PM', guests: '4 Guests', seating: 'Indoor', notes: 'Bringing our dog 🐶', status: 'pending',   submitted: '2024-06-18 14:15' },
+  { id: 3, fname: 'Amit',   lname: 'Singh',  phone: '+91 76543 21098', email: 'amit@example.com',   date: '2024-06-19', time: '01:00 PM', guests: '3 Guests', seating: 'No Preference', notes: '', status: 'pending', submitted: '2024-06-17 09:00' },
+  { id: 4, fname: 'Neha',   lname: 'Gupta',  phone: '+91 65432 10987', email: 'neha@example.com',   date: '2024-06-22', time: '09:00 AM', guests: '2 Guests', seating: 'Window Side', notes: 'Vegetarian please', status: 'confirmed', submitted: '2024-06-18 16:45' },
+  { id: 5, fname: 'Vikram', lname: 'Arora',  phone: '+91 54321 09876', email: 'vikram@example.com', date: '2024-06-20', time: '08:30 PM', guests: '6 Guests', seating: 'Garden Patio', notes: 'Birthday party', status: 'cancelled', submitted: '2024-06-16 11:20' },
+];
+
+function loadBookings() {
+  document.getElementById('table-loading').style.display = 'block';
+  document.getElementById('bookings-table').style.display = 'none';
+  document.getElementById('empty-state').style.display = 'none';
+
+  const scriptUrl = CAFE_CONFIG.GOOGLE_SCRIPT_URL;
+  const isConnected = scriptUrl && scriptUrl !== 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+
+  if (isConnected) {
+    document.getElementById('setup-notice').style.display = 'none';
+    fetch(scriptUrl + '?action=get')
+      .then(r => r.json())
+      .then(data => {
+        allBookings = data.bookings || [];
+        // Merge local status changes
+        const localStatuses = JSON.parse(localStorage.getItem('booking_statuses') || '{}');
+        allBookings.forEach(b => { if (localStatuses[b.id]) b.status = localStatuses[b.id]; });
+        renderTable(allBookings);
+      })
+      .catch(() => {
+        // Fallback to local
+        allBookings = getLocalBookings();
+        renderTable(allBookings);
+      });
+  } else {
+    // Demo mode
+    setTimeout(() => {
+      allBookings = [...DEMO_BOOKINGS, ...getLocalBookings()];
+      renderTable(allBookings);
+    }, 800);
+  }
+}
+
+function getLocalBookings() {
+  return JSON.parse(localStorage.getItem('cafe_bookings') || '[]');
+}
+
+// ── RENDER ───────────────────────────────────────────────────
+function renderTable(bookings) {
+  document.getElementById('table-loading').style.display = 'none';
+
+  // Update stats
+  document.getElementById('stat-total').textContent     = bookings.length;
+  document.getElementById('stat-pending').textContent   = bookings.filter(b => b.status === 'pending').length;
+  document.getElementById('stat-confirmed').textContent = bookings.filter(b => b.status === 'confirmed').length;
+  document.getElementById('stat-cancelled').textContent = bookings.filter(b => b.status === 'cancelled').length;
+
+  if (!bookings.length) {
+    document.getElementById('empty-state').style.display = 'block';
+    return;
+  }
+
+  const tbody = document.getElementById('bookings-tbody');
+  tbody.innerHTML = '';
+
+  bookings.forEach((b, i) => {
+    const waMsg = encodeURIComponent(
+      `✅ Café JC's Reservation Confirmed!\n\nNamaste ${b.fname}! Aapki booking confirm ho gayi hai.\n📅 Date: ${b.date}\n⏰ Time: ${b.time}\n👥 Guests: ${b.guests}\n🪑 Seating: ${b.seating}\n\nHum aapka intezaar kar rahe hain! 🙏\n\n📍 Coal Depot Complex, Sector 10D, Chandigarh`
+    );
+    const waNum = b.phone ? b.phone.replace(/\D/g,'') : CAFE_CONFIG.CAFE_WHATSAPP.replace(/\D/g,'');
+    const waLink = `https://wa.me/${waNum}?text=${waMsg}`;
+
+    const row = document.createElement('tr');
+    row.dataset.id = b.id;
+    row.innerHTML = `
+      <td>${i + 1}</td>
+      <td class="td-name">${b.fname} ${b.lname}</td>
+      <td class="td-phone"><a href="tel:${b.phone}">${b.phone}</a></td>
+      <td>${b.email || '—'}</td>
+      <td><strong>${b.date}</strong></td>
+      <td>${b.time}</td>
+      <td>${b.guests}</td>
+      <td>${b.seating || '—'}</td>
+      <td class="td-notes">${b.notes || '—'}</td>
+      <td><span class="badge badge-${b.status}">${b.status}</span></td>
+      <td>
+        <div class="action-btns">
+          ${b.status !== 'confirmed' ? `<button class="action-btn btn-confirm" onclick="updateStatus(${b.id}, 'confirmed')">✅</button>` : ''}
+          ${b.status !== 'cancelled' ? `<button class="action-btn btn-cancel"  onclick="updateStatus(${b.id}, 'cancelled')">❌</button>` : ''}
+          <a href="${waLink}" target="_blank" rel="noopener noreferrer"><button class="action-btn btn-wa">WA</button></a>
+          <button class="action-btn btn-delete" onclick="deleteBooking(${b.id})">🗑</button>
+        </div>
+      </td>
+    `;
+    tbody.appendChild(row);
+  });
+
+  document.getElementById('bookings-table').style.display = 'table';
+}
+
+// ── FILTER ───────────────────────────────────────────────────
+function filterBookings() {
+  const q      = document.getElementById('search-input').value.toLowerCase();
+  const status = document.getElementById('status-filter').value;
+  const dateF  = document.getElementById('date-filter').value;
+
+  const today    = new Date().toISOString().split('T')[0];
+  const tomorrow = new Date(Date.now() + 86400000).toISOString().split('T')[0];
+  const weekEnd  = new Date(Date.now() + 7 * 86400000).toISOString().split('T')[0];
+
+  const filtered = allBookings.filter(b => {
+    const matchQ = !q ||
+      `${b.fname} ${b.lname}`.toLowerCase().includes(q) ||
+      (b.phone || '').includes(q) ||
+      (b.email || '').toLowerCase().includes(q);
+
+    const matchS = status === 'all' || b.status === status;
+
+    let matchD = true;
+    if (dateF === 'today')    matchD = b.date === today;
+    if (dateF === 'tomorrow') matchD = b.date === tomorrow;
+    if (dateF === 'week')     matchD = b.date >= today && b.date <= weekEnd;
+
+    return matchQ && matchS && matchD;
+  });
+
+  renderTable(filtered);
+}
+
+// ── ACTIONS ──────────────────────────────────────────────────
+function updateStatus(id, newStatus) {
+  const booking = allBookings.find(b => b.id === id);
+  if (!booking) return;
+  booking.status = newStatus;
+
+  // Save to local storage
+  const localStatuses = JSON.parse(localStorage.getItem('booking_statuses') || '{}');
+  localStatuses[id] = newStatus;
+  localStorage.setItem('booking_statuses', JSON.stringify(localStatuses));
+
+  // Try to update Google Sheet
+  const scriptUrl = CAFE_CONFIG.GOOGLE_SCRIPT_URL;
+  if (scriptUrl && scriptUrl !== 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+    fetch(scriptUrl + `?action=updateStatus&id=${id}&status=${newStatus}`).catch(() => {});
+  }
+
+  renderTable(allBookings);
+}
+
+function deleteBooking(id) {
+  if (!confirm('Ye booking delete karna chahte ho?')) return;
+  allBookings = allBookings.filter(b => b.id !== id);
+
+  // Remove from local storage if local
+  const local = getLocalBookings().filter(b => b.id !== id);
+  localStorage.setItem('cafe_bookings', JSON.stringify(local));
+
+  filterBookings();
+}
+
+function closeModal() {
+  document.getElementById('detail-modal').classList.remove('open');
+}
+</script>
+</body>
+</html>

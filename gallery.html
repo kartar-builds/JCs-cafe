@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery — Café JC's | Chandigarh</title>
+  <meta name="description" content="Browse photos of Café JC's — ambiance, food, beverages and customer moments from Chandigarh's most aesthetic café.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,600;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .filter-tabs { display:flex; gap:.5rem; justify-content:center; flex-wrap:wrap; margin-bottom:2.5rem; }
+    .filter-tab {
+      padding:.55rem 1.4rem;
+      font-size:.76rem;
+      font-weight:600;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      cursor:pointer;
+      background:transparent;
+      border:1.5px solid var(--teal);
+      color:var(--teal);
+      transition:all .2s;
+    }
+    .filter-tab.active, .filter-tab:hover { background:var(--teal); color:var(--cream); }
+    .gallery-item { cursor:pointer; }
+    .gallery-masonry {
+      columns: 3;
+      column-gap: 1rem;
+    }
+    .gallery-masonry .gallery-item {
+      break-inside: avoid;
+      margin-bottom: 1rem;
+      aspect-ratio: unset;
+    }
+    .gallery-masonry .gallery-item img { width:100%; height:auto; }
+    @media(max-width:768px){ .gallery-masonry{ columns:2; } }
+    @media(max-width:420px){ .gallery-masonry{ columns:1; } }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <a href="index.html" class="nav-logo">CAFÉ <span>JC's</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="menu.html">Menu</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="visit.html">Visit</a></li>
+    <li><a href="reservations.html">Reserve</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="tel:+918437043234" class="nav-phone">+91 84370 43234</a>
+    <a href="reservations.html" class="btn-nav">Reserve a Table</a>
+  </div>
+  <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="nav-overlay"></div>
+<div class="nav-drawer">
+  <a href="index.html">Home</a>
+  <a href="menu.html">Menu</a>
+  <a href="gallery.html">Gallery</a>
+  <a href="about.html">About</a>
+  <a href="visit.html">Visit</a>
+  <a href="reservations.html">Reserve</a>
+  <a href="tel:+918437043234" class="drawer-phone">+91 84370 43234</a>
+  <a href="reservations.html" class="btn-drawer">Reserve a Table</a>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="hero-bg" style="background-image: url('https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/9a/3b/74/patio-seating.jpg?w=1400&h=-1&s=1');"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="hero-eyebrow">Eye-Candy</span>
+    <h1>Gallery</h1>
+    <div class="hero-divider"></div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">Through the Lens</span>
+      <h2>A Glimpse of JC's World</h2>
+      <div class="divider"></div>
+      <p>Browse our spaces, signature dishes and memorable moments — then come create your own.</p>
+    </div>
+
+    <!-- Filter tabs -->
+    <div class="filter-tabs reveal" id="gallery-filters">
+      <button class="filter-tab active" data-filter="all">All</button>
+      <button class="filter-tab" data-filter="ambiance">Ambiance</button>
+      <button class="filter-tab" data-filter="food">Food</button>
+      <button class="filter-tab" data-filter="drinks">Drinks</button>
+    </div>
+
+    <!-- Masonry gallery -->
+    <div class="gallery-masonry" id="gallery-masonry">
+
+      <div class="gallery-item lightbox-trigger reveal" data-category="ambiance"
+           data-full="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/9a/39/f6/entrance.jpg?w=1400&h=-1&s=1"
+           data-caption="Grand Entrance">
+        <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/9a/39/f6/entrance.jpg?w=1400&h=-1&s=1" alt="Entrance" loading="lazy">
+        <div class="gallery-shimmer"></div>
+        <div class="gallery-caption">Grand Entrance</div>
+      </div>
+
+      <div class="gallery-item lightbox-trigger reveal reveal-delay-1" data-category="ambiance"
+           data-full="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/9a/3a/c4/indoor-setting-also-available.jpg?w=1400&h=800&s=1"
+           data-caption="Indoor Setting">
+        <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/9a/3a/c4/indoor-setting-also-available.jpg?w=1400&h=800&s=1" alt="Indoor" loading="lazy">
+        <div class="gallery-shimmer"></div>
+        <div class="gallery-caption">Cozy Indoor Nook</div>
+      </div>
+
+      <div class="gallery-item lightbox-trigger reveal reveal-delay-2" data-category="food"
+           data-full="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/9a/3c/81/indo-chini-bro-bro.jpg?w=1600&h=-1&s=1"
+           data-caption="Indo-Chinese Delight">
+        <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/9a/3c/81/indo-chini-bro-bro.jpg?w=1600&h=-1&s=1" alt="Food" loading="lazy">
+        <div class="gallery-shimmer"></div>
+        <div class="gallery-caption">Indo-Chinese Delight</div>
+      </div>
+
+      <div class="gallery-item lightbox-trigger reveal" data-category="ambiance"
+           data-full="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/9a/3a/2f/well-ventilated.jpg?w=1400&h=-1&s=1"
+           data-caption="Well-Ventilated Interiors">
+        <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/9a/3a/2f/well-ventilated.jpg?w=1400&h=-1&s=1" alt="Interiors" loading="lazy">
+        <div class="gallery-shimmer"></div>
+        <div class="gallery-caption">Well-Ventilated Interiors</div>
+      </div>
+
+      <div class="gallery-item lightbox-trigger reveal reveal-delay-1" data-category="drinks"
+           data-full="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/b5/39/c2/cafe-jc-s.jpg?w=900&h=-1&s=1"
+           data-caption="Artisanal Beverages">
+        <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/b5/39/c2/cafe-jc-s.jpg?w=900&h=-1&s=1" alt="Drink" loading="lazy">
+        <div class="gallery-shimmer"></div>
+        <div class="gallery-caption">Artisanal Beverages</div>
+      </div>
+
+      <div class="gallery-item lightbox-trigger reveal reveal-delay-2" data-category="ambiance"
+           data-full="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/9a/3a/15/seating-next-to-a-window.jpg?w=1400&h=-1&s=1"
+           data-caption="Window Side Seating">
+        <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/9a/3a/15/seating-next-to-a-window.jpg?w=1400&h=-1&s=1" alt="Window Seat" loading="lazy">
+        <div class="gallery-shimmer"></div>
+        <div class="gallery-caption">Window Side Seating</div>
+      </div>
+
+      <div class="gallery-item lightbox-trigger reveal" data-category="food"
+           data-full="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/59/71/fb/photo0jpg.jpg?w=2000&h=-1&s=1"
+           data-caption="Signature Platter">
+        <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/59/71/fb/photo0jpg.jpg?w=2000&h=-1&s=1" alt="Food Platter" loading="lazy">
+        <div class="gallery-shimmer"></div>
+        <div class="gallery-caption">Signature Platter</div>
+      </div>
+
+      <div class="gallery-item lightbox-trigger reveal reveal-delay-1" data-category="drinks"
+           data-full="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/b5/39/c6/cafe-jc-s.jpg?w=1100&h=-1&s=1"
+           data-caption="Refreshing Mocktails">
+        <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/b5/39/c6/cafe-jc-s.jpg?w=1100&h=-1&s=1" alt="Mocktail" loading="lazy">
+        <div class="gallery-shimmer"></div>
+        <div class="gallery-caption">Refreshing Mocktails</div>
+      </div>
+
+      <div class="gallery-item lightbox-trigger reveal reveal-delay-2" data-category="ambiance"
+           data-full="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/9a/3b/74/patio-seating.jpg?w=1400&h=-1&s=1"
+           data-caption="Garden Patio">
+        <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/9a/3b/74/patio-seating.jpg?w=1400&h=-1&s=1" alt="Patio" loading="lazy">
+        <div class="gallery-shimmer"></div>
+        <div class="gallery-caption">Lush Garden Patio</div>
+      </div>
+
+      <div class="gallery-item lightbox-trigger reveal" data-category="food"
+           data-full="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/b5/38/bd/cafe-jc-s.jpg?w=1100&h=-1&s=1"
+           data-caption="Chef's Creation">
+        <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/b5/38/bd/cafe-jc-s.jpg?w=1100&h=-1&s=1" alt="Food" loading="lazy">
+        <div class="gallery-shimmer"></div>
+        <div class="gallery-caption">Chef's Creation</div>
+      </div>
+
+      <div class="gallery-item lightbox-trigger reveal reveal-delay-1" data-category="drinks"
+           data-full="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/b5/39/c8/cafe-jc-s.jpg?w=1100&h=-1&s=1"
+           data-caption="Cold Coffee">
+        <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/b5/39/c8/cafe-jc-s.jpg?w=1100&h=-1&s=1" alt="Coffee" loading="lazy">
+        <div class="gallery-shimmer"></div>
+        <div class="gallery-caption">Cold Coffee Special</div>
+      </div>
+
+      <div class="gallery-item lightbox-trigger reveal reveal-delay-2" data-category="ambiance"
+           data-full="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/33/0d/ef/entrance.jpg?w=1000&h=-1&s=1"
+           data-caption="Café Exterior">
+        <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/33/0d/ef/entrance.jpg?w=1000&h=-1&s=1" alt="Exterior" loading="lazy">
+        <div class="gallery-shimmer"></div>
+        <div class="gallery-caption">Café Exterior</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-prev" id="lb-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+  <img class="lightbox-img" id="lightbox-img" src="" alt="">
+  <button class="lightbox-next" id="lb-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
+  <button class="lightbox-close" id="lb-close"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+</div>
+
+<!-- CTA -->
+<section class="cta-band">
+  <div class="container reveal">
+    <span class="eyebrow" style="color:rgba(245,239,224,0.8);">Be Our Guest</span>
+    <h2>Create Your Own Memories</h2>
+    <p>Every visit to Café JC's is a story worth telling. Join us.</p>
+    <a href="reservations.html" class="btn btn-outline">Reserve a Table</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo">CAFÉ <span>JC's</span></div>
+      <p class="footer-tagline">Chandigarh's most aesthetic culinary escape.</p>
+      <div class="footer-social">
+        <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+        <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+      </div>
+    </div>
+    <div>
+      <h4>Navigate</h4>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="menu.html">Our Menu</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="visit.html">Visit + Contact</a></li>
+        <li><a href="reservations.html">Reservations</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <ul class="footer-info">
+        <li><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Coal Depot Complex, Sector 10D, Chandigarh – 160011</li>
+        <li><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 11.41 19a19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg><a href="tel:+918437043234">+91 84370 43234</a></li>
+        <li><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>08:30 AM – 11:30 PM (All Days)</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">&copy; 2024 Café JC's. All rights reserved.</div>
+</footer>
+
+<script src="main.js" defer></script>
+<script>
+  // Gallery filter
+  document.addEventListener('DOMContentLoaded', () => {
+    const ftabs = document.querySelectorAll('.filter-tab');
+    const items = document.querySelectorAll('#gallery-masonry .gallery-item');
+    ftabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        ftabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        const f = tab.dataset.filter;
+        items.forEach(item => {
+          const show = f === 'all' || item.dataset.category === f;
+          item.style.transition = 'opacity 0.3s, transform 0.3s';
+          if (show) {
+            item.style.display = '';
+            setTimeout(() => { item.style.opacity = '1'; item.style.transform = ''; }, 10);
+          } else {
+            item.style.opacity = '0';
+            item.style.transform = 'scale(0.95)';
+            setTimeout(() => { item.style.display = 'none'; }, 300);
+          }
+        });
+      });
+    });
+  });
+</script>
+</body>
+</html>
